@@ -1,0 +1,69 @@
+{
+  "name": "search_promotions",
+  "description": "Semantic search over promotion index using query and user profile.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "query": {
+        "type": "string",
+        "description": "Search query string"
+      },
+      "user_profile": {
+        "type": "object",
+        "properties": {
+          "user_type": {
+            "type": "string",
+            "description": "Type of user (casual, professional, enterprise)"
+          },
+          "interests": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of user interests/categories"
+          },
+          "budget_level": {
+            "type": "string",
+            "enum": ["low", "medium", "high"],
+            "description": "User's budget level"
+          }
+        },
+        "required": ["user_type", "interests", "budget_level"]
+      }
+    },
+    "required": ["query", "user_profile"]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "results": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique promotion identifier"
+            },
+            "title": {
+              "type": "string",
+              "description": "Promotion title"
+            },
+            "description": {
+              "type": "string",
+              "description": "Promotion description"
+            },
+            "link": {
+              "type": "string",
+              "description": "Promotion URL"
+            },
+            "score": {
+              "type": "number",
+              "description": "Relevance score (0-1)"
+            }
+          }
+        }
+      }
+    }
+  }
+}

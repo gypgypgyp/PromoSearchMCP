@@ -1,0 +1,80 @@
+{
+  "name": "rank_promotions",
+  "description": "Rank promotion candidates based on predicted click-through rate and user profile.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "candidates": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique promotion identifier"
+            },
+            "title": {
+              "type": "string",
+              "description": "Promotion title"
+            },
+            "description": {
+              "type": "string",
+              "description": "Promotion description"
+            },
+            "link": {
+              "type": "string",
+              "description": "Promotion URL"
+            }
+          },
+          "required": ["id", "title", "description", "link"]
+        },
+        "description": "List of promotion candidates to rank"
+      },
+      "user_profile": {
+        "type": "object",
+        "properties": {
+          "user_type": {
+            "type": "string",
+            "description": "Type of user (casual, professional, enterprise)"
+          },
+          "interests": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of user interests/categories"
+          },
+          "budget_level": {
+            "type": "string",
+            "enum": ["low", "medium", "high"],
+            "description": "User's budget level"
+          }
+        },
+        "required": ["user_type", "interests", "budget_level"]
+      }
+    },
+    "required": ["candidates", "user_profile"]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "ranked_promotions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique promotion identifier"
+            },
+            "score": {
+              "type": "number",
+              "description": "Predicted CTR/CVR score"
+            }
+          }
+        },
+        "description": "Promotions ranked by predicted performance"
+      }
+    }
+  }
+}

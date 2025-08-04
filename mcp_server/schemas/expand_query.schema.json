@@ -1,0 +1,26 @@
+{
+  "name": "expand_query",
+  "description": "Use LLM to expand short natural language query into a list of long-tail keyword candidates.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "query": {
+        "type": "string",
+        "description": "User's natural language query."
+      }
+    },
+    "required": ["query"]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "expanded_queries": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "List of expanded query variations"
+      }
+    }
+  }
+}

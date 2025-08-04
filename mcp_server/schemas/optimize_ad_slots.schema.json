@@ -1,0 +1,55 @@
+{
+  "name": "optimize_ad_slots",
+  "description": "Determine where to insert promotion ads into search result context.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "search_results": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "List of organic search result strings"
+      },
+      "promotions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique promotion identifier"
+            },
+            "title": {
+              "type": "string",
+              "description": "Promotion title"
+            },
+            "description": {
+              "type": "string",
+              "description": "Promotion description"
+            },
+            "link": {
+              "type": "string",
+              "description": "Promotion URL"
+            }
+          },
+          "required": ["id", "title", "description"]
+        },
+        "description": "List of promotions to insert"
+      }
+    },
+    "required": ["search_results", "promotions"]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "injected_results": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Search results with promotions optimally inserted"
+      }
+    }
+  }
+}
